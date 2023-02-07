@@ -1,0 +1,8 @@
+URL: 193.141.64.241,2019
+DatabaseName: hkhademi_
+UserName: hkhademin
+Password: 13Hosseini65
+
+"ConnectionStrings": {
+    "SqlConnection": "server=193.141.64.241:2019; database=hkhademi_; Integrated Security=true;encrypt=false"
+}
