@@ -3316,11 +3316,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/mohammadhosseini/Desktop/Azmoonet/agricaltech.csproj",
+      "projectUniqueName": "/Users/mohammadhosseini/Desktop/Azmoon_BE/agricaltech.csproj",
       "projectName": "agricaltech",
-      "projectPath": "/Users/mohammadhosseini/Desktop/Azmoonet/agricaltech.csproj",
+      "projectPath": "/Users/mohammadhosseini/Desktop/Azmoon_BE/agricaltech.csproj",
       "packagesPath": "/Users/mohammadhosseini/.nuget/packages/",
-      "outputPath": "/Users/mohammadhosseini/Desktop/Azmoonet/obj/",
+      "outputPath": "/Users/mohammadhosseini/Desktop/Azmoon_BE/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/mohammadhosseini/.nuget/NuGet/NuGet.Config"

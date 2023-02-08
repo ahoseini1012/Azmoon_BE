@@ -15,18 +15,10 @@ public class AzmoonController : ControllerBase
     private readonly DbContext _context;
     private readonly IHubContext<MyHub> _hub;
 
-    private class data
-    {
-        public int questionNumber { get; set; }
-        public string question { get; set; } = String.Empty;
-    }
 
-    public class NextQuestionBodyRequest
-    {
-        public string mobileNumber { get; set; }=String.Empty;
-        public int currentQuestionNumber { get; set; }
-    }
-    private readonly List<data> _data = new List<data>();
+
+
+    private readonly List<QuestionDetail> _data = new List<QuestionDetail>();
 
     public AzmoonController(ILogger<AzmoonController> logger, IOptions<AzmoonetOptions> options, DbContext context, IHubContext<MyHub> hub)
     {
@@ -37,20 +29,29 @@ public class AzmoonController : ControllerBase
 
         for (int i = 1; i < 6; i++)
         {
-            _data.Add(new data
+            _data.Add(new QuestionDetail
             {
                 questionNumber = i,
-                question = string.Format("سوال شماره {0}", i.ToString())
+                questionId = 1000+i,
+                question = string.Format("سوال شماره {0}", i.ToString()),
+                responses =  new List<string>(){"گزینه الف","گزینه ب","هیچکدام"}
             });
         }
     }
 
     [HttpPost("showNextQuestion")]
-    public IActionResult showNextQuestion(NextQuestionBodyRequest request)
+    public IActionResult changeQuestion(NextQuestionBodyRequest request)
     {
-        _hub.Clients.All.SendAsync("showNextQuestion", _data[request.currentQuestionNumber]);
+        _hub.Clients.All.SendAsync("showNextQuestion", _data[request.currentQuestionNumber + request.addQuestionNumber - 1]);
         return Ok(new { Message = "Wellcomming message" });
     }
+
+    [HttpPost("setStudentAnswer")]
+    public IActionResult setStudentAnswer(ClientAnswer request)
+    {
+        return Ok(new { Message = "Wellcomming message" });
+    }
+
 
 
     // [HttpPost("GetAttendeeByMobile")]
