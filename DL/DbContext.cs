@@ -12,4 +12,5 @@ public class DbContext
         _options = options.Value;
     }
     public IDbConnection CreateConnection() => new SqlConnection(_options.ConnectionString);
+//  Server=(localdb)\\mssqllocaldb;Database=Test;Trusted_Connection=True;MultipleActiveResultSets=true"))
 }

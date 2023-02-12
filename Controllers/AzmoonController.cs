@@ -1,5 +1,6 @@
 using Agricaltech.BL;
 using Agricaltech.DL;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Options;
@@ -16,8 +17,6 @@ public class AzmoonController : ControllerBase
     private readonly IHubContext<MyHub> _hub;
 
 
-
-
     private readonly List<QuestionDetail> _data = new List<QuestionDetail>();
 
     public AzmoonController(ILogger<AzmoonController> logger, IOptions<AzmoonetOptions> options, DbContext context, IHubContext<MyHub> hub)
@@ -32,33 +31,52 @@ public class AzmoonController : ControllerBase
             _data.Add(new QuestionDetail
             {
                 questionNumber = i,
-                questionId = 1000+i,
+                questionId = 1000 + i,
                 question = string.Format("سوال شماره {0}", i.ToString()),
-                responses =  new List<string>(){"گزینه الف","گزینه ب","هیچکدام"}
+                responses = new List<string>() { "گزینه الف", "گزینه ب", "هیچکدام" }
             });
         }
     }
 
+    [EnableCors("Policy1")]
     [HttpPost("showNextQuestion")]
     public IActionResult changeQuestion(NextQuestionBodyRequest request)
     {
         _hub.Clients.All.SendAsync("showNextQuestion", _data[request.currentQuestionNumber + request.addQuestionNumber - 1]);
         return Ok(new { Message = "Wellcomming message" });
     }
-
+    [EnableCors("Policy1")]
     [HttpPost("setStudentAnswer")]
     public IActionResult setStudentAnswer(ClientAnswer request)
     {
         return Ok(new { Message = "Wellcomming message" });
     }
 
-
-
-    // [HttpPost("GetAttendeeByMobile")]
-    // public async Task<IEnumerable<Attendee>> GetAttendeeInfo(GetAttendeeByMobileModel request)
-    // {
-    //     var config = _options.ConnectionString;
-    //     IEnumerable<Attendee> attendees = await RegistrationBL.GetAttendeeByMobile(request.MobileNo, _context);
-    //     return attendees;
-    // }
+    [EnableCors("Policy1")]
+    [HttpPost("RegisterExam")]
+    public async Task<ApiResult<RegisterExamModel_Res>> RegisterExam(RegisterExamModel_Req request)
+    {
+        ApiResult<RegisterExamModel_Res> result = new ApiResult<RegisterExamModel_Res>();
+        try
+        {
+            var config = _options.ConnectionString;
+            IEnumerable<RegisterExamModel_Res> registerExamModel = await RegistrationBL.RegisterExam(request.MobileNumber, _context);
+            result.data = registerExamModel.First();
+            result.status = 200;
+            result.error = -1;
+            result.err_description = String.Empty;
+            return result;
+        }
+        catch (System.Exception e)
+        {
+            System.Console.WriteLine(e.ToString());
+            result.data!.Id = -1;
+            result.data.TeacherId = -1;
+            result.data.ExamId = -1;
+            result.status = 200;
+            result.error = -1;
+            result.err_description = String.Empty;
+            return result;
+        }
+    }
 }

@@ -10,14 +10,20 @@ builder.Host.ConfigureAppConfiguration((hostingContext, config) =>
                        optional: true,
                        reloadOnChange: true);
 });
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("CorsPolicy", builder => builder
-        .WithOrigins("http://localhost:4200")
-        .AllowAnyMethod()
-        .AllowAnyHeader()
-        .AllowCredentials());
+    options.AddPolicy("Policy1",
+                  policy =>
+                  {
+                      policy
+                    //   .WithOrigins("http://localhost:4200", "http://ui.h-khademin.ir/", "https://ui.h-khademin.ir/")
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                  });
 });
+
 builder.Services.AddConfig(builder.Configuration);
 builder.Services.AddSingleton<DbContext>();
 builder.Services.AddSignalR();
@@ -36,8 +42,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-app.UseCors("CorsPolicy");
+// app.UseHttpsRedirection();
+app.UseCors();
 app.UseAuthorization();
 
 app.MapControllers();
