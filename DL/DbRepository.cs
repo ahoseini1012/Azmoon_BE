@@ -24,4 +24,39 @@ public static class DbRepository
             throw new NotImplementedException();
         }
     }
+
+    public static async Task<IEnumerable<QuestionBank_Res?>> getQuestions(int GroupId, DbContext context)
+    {
+        string query2 = $@"select * from FROM [exibition_db].[hoseini].[Azmoon_QuestionBank]
+        where groupId = {GroupId}";
+        try
+        {
+            var con = context.CreateConnection();
+            var result = await con.QueryAsync<QuestionBank_Res>(query2);
+            return result;
+        }
+        catch (System.Exception e)
+        {
+            System.Console.WriteLine(e.Message);
+            throw new NotImplementedException();
+        }
+    }
+
+    public static async Task<int> TakingAnExam(string SMobile, int examId, DbContext context)
+    {
+        string query2 = $@"insert into Azmoon_Connection 
+        (ExamId,StudentId) 
+        values ({SMobile},{examId})";
+        try
+        {
+            var con = context.CreateConnection();
+            var result = await con.ExecuteAsync(query2);
+            return result;
+        }
+        catch (System.Exception e)
+        {
+            System.Console.WriteLine(e.Message);
+            throw new NotImplementedException();
+        }
+    }
 }

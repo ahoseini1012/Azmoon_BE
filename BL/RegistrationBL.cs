@@ -12,5 +12,16 @@ public static class RegistrationBL
         return result;
     }
 
+    public static async Task<int> TakingAnExam(string SMobile , int examId,DbContext context)
+    {
+        var result = await DbRepository.TakingAnExam(SMobile,examId,context);
+        return result;
+    }
+
+    public static async Task<IEnumerable<QuestionBank_Res?>> getQuestions(int GroupId,DbContext context)
+    {
+        var result = await DbRepository.getQuestions(GroupId,context);
+        return result;
+    }
 
 }

@@ -16,35 +16,32 @@ public class AzmoonController : ControllerBase
     private readonly DbContext _context;
     private readonly IHubContext<MyHub> _hub;
 
-
-    private readonly List<QuestionDetail> _data = new List<QuestionDetail>();
-
     public AzmoonController(ILogger<AzmoonController> logger, IOptions<AzmoonetOptions> options, DbContext context, IHubContext<MyHub> hub)
     {
         _logger = logger;
         _options = options.Value;
         _context = context;
         _hub = hub;
-
-        for (int i = 1; i < 6; i++)
-        {
-            _data.Add(new QuestionDetail
-            {
-                questionNumber = i,
-                questionId = 1000 + i,
-                question = string.Format("سوال شماره {0}", i.ToString()),
-                responses = new List<string>() { "گزینه الف", "گزینه ب", "هیچکدام" }
-            });
-        }
     }
 
     [EnableCors("Policy1")]
     [HttpPost("showNextQuestion")]
-    public IActionResult changeQuestion(NextQuestionBodyRequest request)
+    public async Task<IActionResult> getQuestions(QuestionBank_Req request)
     {
-        _hub.Clients.All.SendAsync("showNextQuestion", _data[request.currentQuestionNumber + request.addQuestionNumber - 1]);
-        return Ok(new { Message = "Wellcomming message" });
+        try
+        {
+            IEnumerable<QuestionBank_Res?> result = await RegistrationBL.getQuestions(request.GroupId, _context);
+            await _hub.Clients.All.SendAsync("showNextQuestion", result?.First(p => p?.QuestionNumber == request.CurrentQustionNumber));
+            return Ok(new { Message = "Wellcomming message" });
+        }
+        catch (System.Exception e)
+        {
+            System.Console.WriteLine(e.ToString());
+            return StatusCode(404);
+        }
+
     }
+
     [EnableCors("Policy1")]
     [HttpPost("setStudentAnswer")]
     public IActionResult setStudentAnswer(ClientAnswer request)
@@ -59,7 +56,6 @@ public class AzmoonController : ControllerBase
         ApiResult<RegisterExamModel_Res> result = new ApiResult<RegisterExamModel_Res>();
         try
         {
-            var config = _options.ConnectionString;
             IEnumerable<RegisterExamModel_Res> registerExamModel = await RegistrationBL.RegisterExam(request.MobileNumber, _context);
             result.data = registerExamModel.First();
             result.status = 200;
@@ -76,6 +72,33 @@ public class AzmoonController : ControllerBase
             result.status = 200;
             result.error = -1;
             result.err_description = String.Empty;
+            return result;
+        }
+    }
+
+    [EnableCors("Policy1")]
+    [HttpPost("TakingAnExam")]
+    public async Task<ApiResult<StudentRegistration_Res>> TakingAnExam(StudentRegistration_Req request)
+    {
+        ApiResult<StudentRegistration_Res> result = new ApiResult<StudentRegistration_Res>();
+        result.data = new StudentRegistration_Res();
+        result.status = 0;
+        result.error = 0;
+        result.err_description = String.Empty;
+        try
+        {
+            var _result = await RegistrationBL.TakingAnExam(request.MobileNumber, request.ExamId, _context);
+            result.data.result = _result;
+            result.status = 200;
+            return result;
+        }
+        catch (System.Exception e)
+        {
+            System.Console.WriteLine(e.ToString());
+            result.data = null;
+            result.status = 400;
+            result.error = 401;
+            result.err_description = e.ToString();
             return result;
         }
     }
