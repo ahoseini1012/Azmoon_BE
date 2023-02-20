@@ -32,8 +32,8 @@ public class AzmoonController : ControllerBase
         {
             IEnumerable<QuestionBank_Res?> result = await RegistrationBL.getQuestions(request.GroupId, _context);
             var data =  result?.First(p => p?.QuestionNumber == request.CurrentQustionNumber+request.AddQuestionNumber);
-            // await _hub.Clients.All.SendAsync("showNextQuestion", data);
-            await _hub.Clients.Group(request.HubGroupName).SendAsync("showNextQuestion",data);
+            await _hub.Clients.All.SendAsync("showNextQuestion", data);
+            // await _hub.Clients.Group(request.HubGroupName).SendAsync("showNextQuestion",data);
             return Ok(new { Message = "Wellcomming message" });
         }
         catch (System.Exception e)
@@ -47,8 +47,9 @@ public class AzmoonController : ControllerBase
 
     [EnableCors("Policy1")]
     [HttpPost("setStudentAnswer")]
-    public IActionResult setStudentAnswer(ClientAnswer request)
+    public async Task setStudentAnswer(string studentId , string examId , string answer , long questionId)
     {
+
         return Ok(new { Message = "Wellcomming message" });
     }
 

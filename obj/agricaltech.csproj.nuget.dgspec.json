@@ -1,25 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "/Users/mohammadhosseini/Desktop/Azmoon_BE/agricaltech.csproj": {}
+    "D:\\Hoseini\\Azmoon_BE\\agricaltech.csproj": {}
   },
   "projects": {
-    "/Users/mohammadhosseini/Desktop/Azmoon_BE/agricaltech.csproj": {
+    "D:\\Hoseini\\Azmoon_BE\\agricaltech.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/mohammadhosseini/Desktop/Azmoon_BE/agricaltech.csproj",
+        "projectUniqueName": "D:\\Hoseini\\Azmoon_BE\\agricaltech.csproj",
         "projectName": "agricaltech",
-        "projectPath": "/Users/mohammadhosseini/Desktop/Azmoon_BE/agricaltech.csproj",
-        "packagesPath": "/Users/mohammadhosseini/.nuget/packages/",
-        "outputPath": "/Users/mohammadhosseini/Desktop/Azmoon_BE/obj/",
+        "projectPath": "D:\\Hoseini\\Azmoon_BE\\agricaltech.csproj",
+        "packagesPath": "C:\\Users\\Hoseini\\.nuget\\packages\\",
+        "outputPath": "D:\\Hoseini\\Azmoon_BE\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/Users/mohammadhosseini/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Hoseini\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -78,7 +84,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.100/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }

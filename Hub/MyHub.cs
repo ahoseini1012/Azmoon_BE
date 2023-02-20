@@ -16,4 +16,5 @@ public class MyHub : Hub<IMyHub>
     {
         await Groups.RemoveFromGroupAsync(connectionId,groupName);
     }
+
 }
