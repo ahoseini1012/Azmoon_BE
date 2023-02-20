@@ -26,12 +26,14 @@ public class AzmoonController : ControllerBase
 
     [EnableCors("Policy1")]
     [HttpPost("showNextQuestion")]
-    public async Task<IActionResult> getQuestions(QuestionBank_Req request)
+    public async Task<IActionResult> showNextQuestion(QuestionBank_Req request)
     {
         try
         {
             IEnumerable<QuestionBank_Res?> result = await RegistrationBL.getQuestions(request.GroupId, _context);
-            await _hub.Clients.All.SendAsync("showNextQuestion", result?.First(p => p?.QuestionNumber == request.CurrentQustionNumber));
+            var data =  result?.First(p => p?.QuestionNumber == request.CurrentQustionNumber+request.AddQuestionNumber);
+            // await _hub.Clients.All.SendAsync("showNextQuestion", data);
+            await _hub.Clients.Group(request.HubGroupName).SendAsync("showNextQuestion",data);
             return Ok(new { Message = "Wellcomming message" });
         }
         catch (System.Exception e)
@@ -39,8 +41,9 @@ public class AzmoonController : ControllerBase
             System.Console.WriteLine(e.ToString());
             return StatusCode(404);
         }
-
     }
+
+
 
     [EnableCors("Policy1")]
     [HttpPost("setStudentAnswer")]
@@ -72,6 +75,39 @@ public class AzmoonController : ControllerBase
             result.status = 200;
             result.error = -1;
             result.err_description = String.Empty;
+            return result;
+        }
+    }
+
+    [EnableCors("Policy1")]
+    [HttpPost("CheckingExam")]
+    public async Task<ApiResult<CheckingExam_Res>> CheckingExam(CheckingExam_Req request)
+    {
+        ApiResult<CheckingExam_Res> result = new ApiResult<CheckingExam_Res>();
+        result.data = new CheckingExam_Res();
+        result.status = 0;
+        result.error = 0;
+        result.err_description = String.Empty;
+        try
+        {
+            var _result = await RegistrationBL.CheckingExam(request.ExamId, _context);
+
+            if (_result == null)
+            {
+                throw new System.Exception("چنین شماره ای وجود ندارد");
+            }
+
+            result.data = _result;
+            result.status = 200;
+            return result;
+        }
+        catch (System.Exception e)
+        {
+            System.Console.WriteLine(e.ToString());
+            result.data = null;
+            result.status = 400;
+            result.error = 401;
+            result.err_description = e.ToString();
             return result;
         }
     }

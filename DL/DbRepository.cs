@@ -27,8 +27,8 @@ public static class DbRepository
 
     public static async Task<IEnumerable<QuestionBank_Res?>> getQuestions(int GroupId, DbContext context)
     {
-        string query2 = $@"select * from FROM [exibition_db].[hoseini].[Azmoon_QuestionBank]
-        where groupId = {GroupId}";
+        string query2 = $@"select * from [exibition_db].[hoseini].[Azmoon_QuestionBank]
+        where QuestionGroupId = {GroupId}";
         try
         {
             var con = context.CreateConnection();
@@ -42,21 +42,46 @@ public static class DbRepository
         }
     }
 
-    public static async Task<int> TakingAnExam(string SMobile, int examId, DbContext context)
+    public static async Task<int> TakingAnExam(string mobilenumber , int examId, DbContext context)
     {
-        string query2 = $@"insert into Azmoon_Connection 
-        (ExamId,StudentId) 
-        values ({SMobile},{examId})";
+        string query = $@"insert into Azmoon_Connection 
+        (mobileNumber , ExamId) 
+        values ({mobilenumber},{examId})";
         try
         {
             var con = context.CreateConnection();
-            var result = await con.ExecuteAsync(query2);
+            var result = await con.ExecuteAsync(query);
             return result;
         }
         catch (System.Exception e)
         {
             System.Console.WriteLine(e.Message);
-            throw new NotImplementedException();
+            throw;
+        }
+    }
+
+    public static async Task<CheckingExam_Res?> CheckingExam(int examId, DbContext context)
+    {
+        string query = $@"
+        SELECT Top (1) *
+        FROM [exibition_db].[hoseini].[Azmoon_Exams]
+        where ExamId= {examId}
+        order by CreatedAt desc";
+        try
+        {
+            var con = context.CreateConnection();
+            var response = await con.QueryAsync<CheckingExam_Res>(query);
+            if (response.Count() == 1)
+            {
+                return response.FirstOrDefault();
+            }else{
+                return null ;
+            }
+        }
+        catch (System.Exception e)
+        {
+            System.Console.WriteLine(e.Message);
+            throw;
         }
     }
 }
