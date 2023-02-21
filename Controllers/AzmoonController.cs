@@ -31,10 +31,10 @@ public class AzmoonController : ControllerBase
         try
         {
             IEnumerable<QuestionBank_Res?> result = await RegistrationBL.getQuestions(request.GroupId, _context);
-            var data =  result?.First(p => p?.QuestionNumber == request.CurrentQustionNumber+request.AddQuestionNumber);
+            var data = result?.First(p => p?.QuestionNumber == request.CurrentQustionNumber + request.AddQuestionNumber);
             await _hub.Clients.All.SendAsync("showNextQuestion", data);
             // await _hub.Clients.Group(request.HubGroupName).SendAsync("showNextQuestion",data);
-            return Ok(new { Message = "Wellcomming message" });
+            return Ok(new { Message = "1" });
         }
         catch (System.Exception e)
         {
@@ -46,11 +46,32 @@ public class AzmoonController : ControllerBase
 
 
     [EnableCors("Policy1")]
-    [HttpPost("setStudentAnswer")]
-    public async Task setStudentAnswer(string studentId , string examId , string answer , long questionId)
+    [HttpPost("SetStudentAnswer")]
+    public async Task<ApiResult<SetStudentAnswer_res>> SetStudentAnswer(SetStudentAnswer_req request)
     {
+        ApiResult<RegisterExamModel_Res> result = new ApiResult<RegisterExamModel_Res>();
 
-        return Ok(new { Message = "Wellcomming message" });
+        try
+        {
+            IEnumerable<RegisterExamModel_Res> registerExamModel = await RegistrationBL.SetStudentAnswer(request, _context);
+            result.data = registerExamModel.First();
+            result.status = 200;
+            result.error = -1;
+            result.err_description = String.Empty;
+            return result;
+        }
+        catch (System.Exception e)
+        {
+            System.Console.WriteLine(e.ToString());
+            result.data!.Id = -1;
+            result.data.TeacherId = -1;
+            result.data.ExamId = -1;
+            result.status = 200;
+            result.error = -1;
+            result.err_description = String.Empty;
+            return result;
+        }
+
     }
 
     [EnableCors("Policy1")]
@@ -95,7 +116,7 @@ public class AzmoonController : ControllerBase
 
             if (_result == null)
             {
-                throw new System.Exception("چنین شماره ای وجود ندارد");
+                throw new System.Exception("شماره نامعتبر");
             }
 
             result.data = _result;
@@ -108,14 +129,14 @@ public class AzmoonController : ControllerBase
             result.data = null;
             result.status = 400;
             result.error = 401;
-            result.err_description = e.ToString();
+            result.err_description = e.Message;
             return result;
         }
     }
 
     [EnableCors("Policy1")]
-    [HttpPost("TakingAnExam")]
-    public async Task<ApiResult<StudentRegistration_Res>> TakingAnExam(StudentRegistration_Req request)
+    [HttpPost("StudentLoginToAnExam")]
+    public async Task<ApiResult<StudentRegistration_Res>> StudentLoginToAnExam(StudentRegistration_Req request)
     {
         ApiResult<StudentRegistration_Res> result = new ApiResult<StudentRegistration_Res>();
         result.data = new StudentRegistration_Res();
@@ -124,7 +145,7 @@ public class AzmoonController : ControllerBase
         result.err_description = String.Empty;
         try
         {
-            var _result = await RegistrationBL.TakingAnExam(request.MobileNumber, request.ExamId, _context);
+            var _result = await RegistrationBL.StudentLoginToAnExam(request.MobileNumber, request.ExamId, _context);
             result.data.result = _result;
             result.status = 200;
             return result;

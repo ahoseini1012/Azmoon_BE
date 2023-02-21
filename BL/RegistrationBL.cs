@@ -6,15 +6,13 @@ public static class RegistrationBL
 {
     public static async Task<IEnumerable<RegisterExamModel_Res>> RegisterExam(string mobileNumber, DbContext context)
     {
-        Random random = new Random();
-        long examId = random.Next(100000, 999999);
-        var result = await DbRepository.RegisterExam(mobileNumber, examId.ToString(), context);
+        var result = await DbRepository.RegisterExam(mobileNumber, context);
         return result;
     }
 
-    public static async Task<int> TakingAnExam(string mobileNumber ,int examId, DbContext context)
+    public static async Task<int> StudentLoginToAnExam(string mobileNumber, int examId, DbContext context)
     {
-        var result = await DbRepository.TakingAnExam(mobileNumber, examId, context);
+        var result = await DbRepository.StudentLoginToAnExam(mobileNumber, examId, context);
         return result;
     }
 
@@ -30,4 +28,9 @@ public static class RegistrationBL
         return result;
     }
 
+    public static async Task<IEnumerable<SetStudentAnswer_res>> SetStudentAnswer(SetStudentAnswer_req request, DbContext context)
+    {
+        var result = await DbRepository.SetStudentAnswer(request, context);
+        return result;
+    }
 }

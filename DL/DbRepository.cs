@@ -6,16 +6,20 @@ using Dapper;
 namespace Agricaltech.DL;
 public static class DbRepository
 {
-    public static async Task<IEnumerable<RegisterExamModel_Res>> RegisterExam(string mobileNumber, string examId, DbContext context)
+    public static async Task<IEnumerable<RegisterExamModel_Res>> RegisterExam(string mobileNumber, DbContext context)
     {
-        string query2 = $@"insert into Azmoon_Exams 
-        (TeacherId,ExamId,CreatedAt) 
-        OUTPUT INSERTED.Id, INSERTED.TeacherId, INSERTED.ExamId, INSERTED.CreatedAt
-        values ({mobileNumber},{examId},GETDATE() )";
+        var TMob = Convert.ToInt64(mobileNumber.Substring(mobileNumber.Length - 10, 10));
+        string query = $@"
+        insert into [Azmoon_Exams]
+        ([TeacherId],[CreatedAt],[ExpireAt])
+        OUTPUT INSERTED.Id, INSERTED.TeacherId, INSERTED.CreatedAt, INSERTED.ExpireAt
+        values ({TMob},GETDATE() ,dateadd(HOUR, 1, getdate()))";
+
+
         try
         {
             var con = context.CreateConnection();
-            var exam = await con.QueryAsync<RegisterExamModel_Res>(query2);
+            var exam = await con.QueryAsync<RegisterExamModel_Res>(query);
             return exam;
         }
         catch (System.Exception e)
@@ -42,8 +46,11 @@ public static class DbRepository
         }
     }
 
-    public static async Task<int> TakingAnExam(string mobilenumber , int examId, DbContext context)
+    public static async Task<int> StudentLoginToAnExam(string mobilenumber, int examId, DbContext context)
     {
+
+
+
         string query = $@"insert into Azmoon_Connection 
         (mobileNumber , ExamId) 
         values ({mobilenumber},{examId})";
@@ -62,20 +69,53 @@ public static class DbRepository
 
     public static async Task<CheckingExam_Res?> CheckingExam(int examId, DbContext context)
     {
+        // string checkExamQuery = $@"select * from Azmoon_Exam where id = examId and expireAt>getdate()";
+
         string query = $@"
         SELECT Top (1) *
         FROM [exibition_db].[hoseini].[Azmoon_Exams]
-        where ExamId= {examId}
+        where id= {examId} and expireAt>getdate()
         order by CreatedAt desc";
         try
         {
             var con = context.CreateConnection();
+            // var checkExam = con.QueryAsync(checkExamQuery);
+
             var response = await con.QueryAsync<CheckingExam_Res>(query);
             if (response.Count() == 1)
             {
                 return response.FirstOrDefault();
-            }else{
-                return null ;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        catch (System.Exception e)
+        {
+            System.Console.WriteLine(e.Message);
+            throw;
+        }
+    }
+
+    internal static Task SetStudentAnswer(SetStudentAnswer_req request, DbContext context)
+    {
+
+
+        string query = $@"
+            insert into Azmoon_Answers (examId,questionId,correctAnswer,studentId,studentAnswer)
+            vlues ({request.examId},{request.questionId},{request.correctAnswer},{request.studentId},{request.studentAnswer})";
+        try
+        {
+            var con = context.CreateConnection();
+            var response = await con.exe<CheckingExam_Res>(query);
+            if (response.Count() == 1)
+            {
+                return response.FirstOrDefault();
+            }
+            else
+            {
+                return null;
             }
         }
         catch (System.Exception e)

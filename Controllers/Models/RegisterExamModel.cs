@@ -9,4 +9,5 @@ public class RegisterExamModel_Res
     public long TeacherId { get; set; }
     public long ExamId { get; set; }
     public DateTime CreatedAt { get; set; }
+    public DateTime ExpireAt { get; set; }
 }
