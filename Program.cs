@@ -2,6 +2,9 @@ using Agricaltech;
 using Agricaltech.DL;
 
 var builder = WebApplication.CreateBuilder(args);
+// builder.Logging.AddLog4Net();
+
+
 
 // Add services to the container.
 builder.Host.ConfigureAppConfiguration((hostingContext, config) =>

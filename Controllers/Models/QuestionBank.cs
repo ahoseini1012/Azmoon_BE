@@ -15,4 +15,5 @@ public class QuestionBank_Res
     public string Answer1 { get; set; } = String.Empty;
     public string Answer2 { get; set; } = String.Empty;
     public string Answer3 { get; set; } = String.Empty;
+    public int CorrectAnswer { get; set; }
 }

@@ -98,24 +98,24 @@ public static class DbRepository
         }
     }
 
-    internal static Task SetStudentAnswer(SetStudentAnswer_req request, DbContext context)
+    internal static async Task<SetStudentAnswer_res> SetStudentAnswer(SetStudentAnswer_req request, DbContext context)
     {
-
-
+        SetStudentAnswer_res Results = new SetStudentAnswer_res();
         string query = $@"
             insert into Azmoon_Answers (examId,questionId,correctAnswer,studentId,studentAnswer)
-            vlues ({request.examId},{request.questionId},{request.correctAnswer},{request.studentId},{request.studentAnswer})";
+            values ({request.examId},{request.questionId},{request.correctAnswer},{request.studentId},{request.studentAnswer})";
         try
         {
             var con = context.CreateConnection();
-            var response = await con.exe<CheckingExam_Res>(query);
-            if (response.Count() == 1)
+            var response = await con.ExecuteAsync(query);
+            if (response == 1)
             {
-                return response.FirstOrDefault();
+                Results.isInserted = true;
+                return Results;
             }
             else
             {
-                return null;
+                throw new Exception("خطا در انجام ثبت داده");
             }
         }
         catch (System.Exception e)

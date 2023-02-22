@@ -28,7 +28,7 @@ public static class RegistrationBL
         return result;
     }
 
-    public static async Task<IEnumerable<SetStudentAnswer_res>> SetStudentAnswer(SetStudentAnswer_req request, DbContext context)
+    public static async Task<SetStudentAnswer_res> SetStudentAnswer(SetStudentAnswer_req request, DbContext context)
     {
         var result = await DbRepository.SetStudentAnswer(request, context);
         return result;

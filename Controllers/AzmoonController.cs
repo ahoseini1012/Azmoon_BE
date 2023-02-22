@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 
 namespace Agricaltech.Controllers;
 
@@ -49,24 +50,29 @@ public class AzmoonController : ControllerBase
     [HttpPost("SetStudentAnswer")]
     public async Task<ApiResult<SetStudentAnswer_res>> SetStudentAnswer(SetStudentAnswer_req request)
     {
-        ApiResult<RegisterExamModel_Res> result = new ApiResult<RegisterExamModel_Res>();
+        ApiResult<SetStudentAnswer_res> result = new ApiResult<SetStudentAnswer_res>();
 
         try
         {
-            IEnumerable<RegisterExamModel_Res> registerExamModel = await RegistrationBL.SetStudentAnswer(request, _context);
-            result.data = registerExamModel.First();
-            result.status = 200;
-            result.error = -1;
-            result.err_description = String.Empty;
-            return result;
+            SetStudentAnswer_res data = await RegistrationBL.SetStudentAnswer(request, _context);
+            if (data.isInserted)
+            {
+                result.data = data;
+                result.status = 200;
+                result.error = -1;
+                result.err_description = String.Empty;
+                return result;
+            }
+            else
+            {
+                throw new Exception("عدم انجام عملیات");
+            }
         }
         catch (System.Exception e)
         {
             System.Console.WriteLine(e.ToString());
-            result.data!.Id = -1;
-            result.data.TeacherId = -1;
-            result.data.ExamId = -1;
-            result.status = 200;
+            result.data = null;
+            result.status = 400;
             result.error = -1;
             result.err_description = String.Empty;
             return result;
