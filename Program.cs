@@ -2,9 +2,6 @@ using Agricaltech;
 using Agricaltech.DL;
 
 var builder = WebApplication.CreateBuilder(args);
-// builder.Logging.AddLog4Net();
-
-
 
 // Add services to the container.
 builder.Host.ConfigureAppConfiguration((hostingContext, config) =>
@@ -12,6 +9,7 @@ builder.Host.ConfigureAppConfiguration((hostingContext, config) =>
     config.AddJsonFile("appsettings.json",
                        optional: true,
                        reloadOnChange: true);
+
 });
 
 builder.Services.AddCors(options =>
@@ -37,6 +35,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+ var loggerFactory = app.Services.GetService<ILoggerFactory>();
+loggerFactory.AddFile(builder.Configuration["Logging:LogFilePath"]!.ToString()); 
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

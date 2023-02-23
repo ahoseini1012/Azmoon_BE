@@ -1,2 +1,0 @@
-2023-02-22 17:59:44,534 ERROR Agricaltech.Controllers.AzmoonController.MoveNext [33] - MESSAGE: error
-2023-02-22 17:59:52,275 ERROR Agricaltech.Controllers.AzmoonController.MoveNext [33] - MESSAGE: error

@@ -2,11 +2,12 @@
 
 using Agricaltech.BL;
 using Dapper;
+using Newtonsoft.Json;
 
 namespace Agricaltech.DL;
 public static class DbRepository
 {
-    public static async Task<IEnumerable<RegisterExamModel_Res>> RegisterExam(string mobileNumber, DbContext context)
+    public static async Task<IEnumerable<RegisterExamModel_Res>> RegisterExam(string mobileNumber, DbContext context,ILogger _logger)
     {
         var TMob = Convert.ToInt64(mobileNumber.Substring(mobileNumber.Length - 10, 10));
         string query = $@"
@@ -20,6 +21,7 @@ public static class DbRepository
         {
             var con = context.CreateConnection();
             var exam = await con.QueryAsync<RegisterExamModel_Res>(query);
+            _logger.LogInformation("DL:: "+JsonConvert.SerializeObject(exam));
             return exam;
         }
         catch (System.Exception e)
@@ -29,7 +31,7 @@ public static class DbRepository
         }
     }
 
-    public static async Task<IEnumerable<QuestionBank_Res?>> getQuestions(int GroupId, DbContext context)
+    public static async Task<IEnumerable<QuestionBank_Res?>> getQuestions(int GroupId, DbContext context,ILogger _logger)
     {
         string query2 = $@"select * from [exibition_db].[hoseini].[Azmoon_QuestionBank]
         where QuestionGroupId = {GroupId}";
@@ -37,6 +39,8 @@ public static class DbRepository
         {
             var con = context.CreateConnection();
             var result = await con.QueryAsync<QuestionBank_Res>(query2);
+            _logger.LogInformation("DL:: "+JsonConvert.SerializeObject(result));
+
             return result;
         }
         catch (System.Exception e)
@@ -46,7 +50,7 @@ public static class DbRepository
         }
     }
 
-    public static async Task<int> StudentLoginToAnExam(string mobilenumber, int examId, DbContext context)
+    public static async Task<int> StudentLoginToAnExam(string mobilenumber, int examId, DbContext context,ILogger _logger)
     {
 
 
@@ -58,6 +62,7 @@ public static class DbRepository
         {
             var con = context.CreateConnection();
             var result = await con.ExecuteAsync(query);
+            _logger.LogInformation("DL:: "+JsonConvert.SerializeObject(result));
             return result;
         }
         catch (System.Exception e)
@@ -67,7 +72,7 @@ public static class DbRepository
         }
     }
 
-    public static async Task<CheckingExam_Res?> CheckingExam(int examId, DbContext context)
+    public static async Task<CheckingExam_Res?> CheckingExam(int examId, DbContext context,ILogger _logger)
     {
         // string checkExamQuery = $@"select * from Azmoon_Exam where id = examId and expireAt>getdate()";
 
@@ -82,8 +87,11 @@ public static class DbRepository
             // var checkExam = con.QueryAsync(checkExamQuery);
 
             var response = await con.QueryAsync<CheckingExam_Res>(query);
+            _logger.LogInformation("DL:: "+JsonConvert.SerializeObject(response));
+
             if (response.Count() == 1)
             {
+
                 return response.FirstOrDefault();
             }
             else
@@ -98,7 +106,7 @@ public static class DbRepository
         }
     }
 
-    internal static async Task<SetStudentAnswer_res> SetStudentAnswer(SetStudentAnswer_req request, DbContext context)
+    internal static async Task<SetStudentAnswer_res> SetStudentAnswer(SetStudentAnswer_req request, DbContext context,ILogger _logger)
     {
         SetStudentAnswer_res Results = new SetStudentAnswer_res();
         string query = $@"
@@ -108,6 +116,8 @@ public static class DbRepository
         {
             var con = context.CreateConnection();
             var response = await con.ExecuteAsync(query);
+            _logger.LogInformation("DL:: "+JsonConvert.SerializeObject(response));
+
             if (response == 1)
             {
                 Results.isInserted = true;

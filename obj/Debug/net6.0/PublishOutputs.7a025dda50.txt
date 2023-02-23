@@ -1,4 +1,5 @@
 D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\agricaltech.exe
+D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\log4net.config
 D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\appsettings.Development.json
 D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\appsettings.json
 D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\agricaltech.dll
@@ -15,6 +16,7 @@ D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\Microsoft.Data.SqlClient.dll
 D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\Microsoft.Extensions.Configuration.dll
 D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\Microsoft.Extensions.Configuration.Abstractions.dll
 D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\Microsoft.Extensions.DependencyModel.dll
 D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\Microsoft.Extensions.Features.dll
 D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\Microsoft.Extensions.Options.dll
 D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\Microsoft.Extensions.Primitives.dll
@@ -29,6 +31,19 @@ D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\Microsoft.IdentityModel.Tokens.dll
 D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\Microsoft.OpenApi.dll
 D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\Microsoft.SqlServer.Server.dll
 D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\Microsoft.Win32.SystemEvents.dll
+D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\Newtonsoft.Json.dll
+D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\Serilog.dll
+D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\Serilog.AspNetCore.dll
+D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\Serilog.Extensions.Hosting.dll
+D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\Serilog.Extensions.Logging.dll
+D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\Serilog.Extensions.Logging.File.dll
+D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\Serilog.Formatting.Compact.dll
+D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\Serilog.Settings.Configuration.dll
+D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\Serilog.Sinks.Async.dll
+D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\Serilog.Sinks.Console.dll
+D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\Serilog.Sinks.Debug.dll
+D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\Serilog.Sinks.File.dll
+D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\Serilog.Sinks.RollingFile.dll
 D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\Swashbuckle.AspNetCore.Swagger.dll
 D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\Hoseini\Azmoon_BE\bin\Debug\net6.0\publish\Swashbuckle.AspNetCore.SwaggerUI.dll

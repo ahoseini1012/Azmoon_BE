@@ -5,12 +5,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Serilog.AspNetCore" Version="6.1.0"/>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3"/>
     <PackageReference Include="Dapper" Version="2.0.123"/>
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.0.1"/>
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0"/>
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Common" Version="7.0.2"/>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2"/>
-    <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="6.1.0"/>
+    <PackageReference Include="Serilog.Extensions.Logging.File" Version="3.0.0"/>
   </ItemGroup>
 </Project>

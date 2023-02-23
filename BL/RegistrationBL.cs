@@ -4,33 +4,34 @@ using Agricaltech.DL;
 namespace Agricaltech.BL;
 public static class RegistrationBL
 {
-    public static async Task<IEnumerable<RegisterExamModel_Res>> RegisterExam(string mobileNumber, DbContext context)
+    public static async Task<IEnumerable<RegisterExamModel_Res>> RegisterExam(string mobileNumber, DbContext context,ILogger _logger)
     {
-        var result = await DbRepository.RegisterExam(mobileNumber, context);
+        var result = await DbRepository.RegisterExam(mobileNumber, context,_logger);
         return result;
     }
 
-    public static async Task<int> StudentLoginToAnExam(string mobileNumber, int examId, DbContext context)
+    public static async Task<int> StudentLoginToAnExam(string mobileNumber, int examId, DbContext context,ILogger _logger)
     {
-        var result = await DbRepository.StudentLoginToAnExam(mobileNumber, examId, context);
+        var result = await DbRepository.StudentLoginToAnExam(mobileNumber, examId, context,_logger);
         return result;
     }
 
-    public static async Task<IEnumerable<QuestionBank_Res?>> getQuestions(int GroupId, DbContext context)
+    public static async Task<IEnumerable<QuestionBank_Res?>> getQuestions(int GroupId, DbContext context,ILogger _logger)
     {
-        var result = await DbRepository.getQuestions(GroupId, context);
+        var result = await DbRepository.getQuestions(GroupId, context,_logger);
         return result;
     }
 
-    public static async Task<CheckingExam_Res?> CheckingExam(int examId, DbContext context)
+    public static async Task<CheckingExam_Res?> CheckingExam(int examId, DbContext context,ILogger _logger)
     {
-        var result = await DbRepository.CheckingExam(examId, context);
+        var result = await DbRepository.CheckingExam(examId, context,_logger);
         return result;
     }
 
-    public static async Task<SetStudentAnswer_res> SetStudentAnswer(SetStudentAnswer_req request, DbContext context)
+    public static async Task<SetStudentAnswer_res> SetStudentAnswer(SetStudentAnswer_req request, DbContext context,ILogger _logger)
     {
-        var result = await DbRepository.SetStudentAnswer(request, context);
+        _logger.LogInformation("BL:SetStudentAnswer:");
+        var result = await DbRepository.SetStudentAnswer(request, context,_logger);
         return result;
     }
 }
