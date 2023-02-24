@@ -4385,31 +4385,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Hoseini\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "/Users/mohammadhosseini/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "d:\\Hoseini\\Azmoon_BE\\agricaltech.csproj",
+      "projectUniqueName": "/Users/mohammadhosseini/Desktop/Azmoon_BE/agricaltech.csproj",
       "projectName": "agricaltech",
-      "projectPath": "d:\\Hoseini\\Azmoon_BE\\agricaltech.csproj",
-      "packagesPath": "C:\\Users\\Hoseini\\.nuget\\packages\\",
-      "outputPath": "d:\\Hoseini\\Azmoon_BE\\obj\\",
+      "projectPath": "/Users/mohammadhosseini/Desktop/Azmoon_BE/agricaltech.csproj",
+      "packagesPath": "/Users/mohammadhosseini/.nuget/packages/",
+      "outputPath": "/Users/mohammadhosseini/Desktop/Azmoon_BE/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Hoseini\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/mohammadhosseini/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4480,7 +4473,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.100/RuntimeIdentifierGraph.json"
       }
     }
   }

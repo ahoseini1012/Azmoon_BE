@@ -106,7 +106,7 @@ public static class DbRepository
         }
     }
 
-    internal static async Task<SetStudentAnswer_res> SetStudentAnswer(SetStudentAnswer_req request, DbContext context,ILogger _logger)
+    public static async Task<SetStudentAnswer_res> SetStudentAnswer(SetStudentAnswer_req request, DbContext context,ILogger _logger)
     {
         SetStudentAnswer_res Results = new SetStudentAnswer_res();
         string query = $@"
@@ -134,4 +134,26 @@ public static class DbRepository
             throw;
         }
     }
+
+        public static async Task<IEnumerable<ReposrtAnswers_res>> ReportAnswers(ReposrtAnswers_req request, DbContext context,ILogger _logger)
+    {
+        SetStudentAnswer_res Results = new SetStudentAnswer_res();
+        string query = $@"  select studentId , count(*) studentAnswer
+                            FROM [exibition_db].[hoseini].[Azmoon_Answers]
+                            where examId={request.examId} and studentAnswer=correctAnswer
+                            group by studentId";
+        try
+        {
+            var con = context.CreateConnection();
+            var response = await con.QueryAsync<ReposrtAnswers_res>(query);
+            return response;
+        }
+        catch (System.Exception e)
+        {
+            System.Console.WriteLine(e.Message);
+            throw;
+        }
+    }
 }
+
+
