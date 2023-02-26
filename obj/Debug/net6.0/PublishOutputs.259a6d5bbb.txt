@@ -1,4 +1,5 @@
 /Users/mohammadhosseini/Desktop/Azmoon_BE/bin/Debug/net6.0/publish/agricaltech
+/Users/mohammadhosseini/Desktop/Azmoon_BE/bin/Debug/net6.0/publish/log4net.config
 /Users/mohammadhosseini/Desktop/Azmoon_BE/bin/Debug/net6.0/publish/appsettings.Development.json
 /Users/mohammadhosseini/Desktop/Azmoon_BE/bin/Debug/net6.0/publish/appsettings.json
 /Users/mohammadhosseini/Desktop/Azmoon_BE/bin/Debug/net6.0/publish/agricaltech.dll
@@ -15,6 +16,7 @@
 /Users/mohammadhosseini/Desktop/Azmoon_BE/bin/Debug/net6.0/publish/Microsoft.Extensions.Configuration.dll
 /Users/mohammadhosseini/Desktop/Azmoon_BE/bin/Debug/net6.0/publish/Microsoft.Extensions.Configuration.Abstractions.dll
 /Users/mohammadhosseini/Desktop/Azmoon_BE/bin/Debug/net6.0/publish/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+/Users/mohammadhosseini/Desktop/Azmoon_BE/bin/Debug/net6.0/publish/Microsoft.Extensions.DependencyModel.dll
 /Users/mohammadhosseini/Desktop/Azmoon_BE/bin/Debug/net6.0/publish/Microsoft.Extensions.Features.dll
 /Users/mohammadhosseini/Desktop/Azmoon_BE/bin/Debug/net6.0/publish/Microsoft.Extensions.Options.dll
 /Users/mohammadhosseini/Desktop/Azmoon_BE/bin/Debug/net6.0/publish/Microsoft.Extensions.Primitives.dll
@@ -29,6 +31,19 @@
 /Users/mohammadhosseini/Desktop/Azmoon_BE/bin/Debug/net6.0/publish/Microsoft.OpenApi.dll
 /Users/mohammadhosseini/Desktop/Azmoon_BE/bin/Debug/net6.0/publish/Microsoft.SqlServer.Server.dll
 /Users/mohammadhosseini/Desktop/Azmoon_BE/bin/Debug/net6.0/publish/Microsoft.Win32.SystemEvents.dll
+/Users/mohammadhosseini/Desktop/Azmoon_BE/bin/Debug/net6.0/publish/Newtonsoft.Json.dll
+/Users/mohammadhosseini/Desktop/Azmoon_BE/bin/Debug/net6.0/publish/Serilog.dll
+/Users/mohammadhosseini/Desktop/Azmoon_BE/bin/Debug/net6.0/publish/Serilog.AspNetCore.dll
+/Users/mohammadhosseini/Desktop/Azmoon_BE/bin/Debug/net6.0/publish/Serilog.Extensions.Hosting.dll
+/Users/mohammadhosseini/Desktop/Azmoon_BE/bin/Debug/net6.0/publish/Serilog.Extensions.Logging.dll
+/Users/mohammadhosseini/Desktop/Azmoon_BE/bin/Debug/net6.0/publish/Serilog.Extensions.Logging.File.dll
+/Users/mohammadhosseini/Desktop/Azmoon_BE/bin/Debug/net6.0/publish/Serilog.Formatting.Compact.dll
+/Users/mohammadhosseini/Desktop/Azmoon_BE/bin/Debug/net6.0/publish/Serilog.Settings.Configuration.dll
+/Users/mohammadhosseini/Desktop/Azmoon_BE/bin/Debug/net6.0/publish/Serilog.Sinks.Async.dll
+/Users/mohammadhosseini/Desktop/Azmoon_BE/bin/Debug/net6.0/publish/Serilog.Sinks.Console.dll
+/Users/mohammadhosseini/Desktop/Azmoon_BE/bin/Debug/net6.0/publish/Serilog.Sinks.Debug.dll
+/Users/mohammadhosseini/Desktop/Azmoon_BE/bin/Debug/net6.0/publish/Serilog.Sinks.File.dll
+/Users/mohammadhosseini/Desktop/Azmoon_BE/bin/Debug/net6.0/publish/Serilog.Sinks.RollingFile.dll
 /Users/mohammadhosseini/Desktop/Azmoon_BE/bin/Debug/net6.0/publish/Swashbuckle.AspNetCore.Swagger.dll
 /Users/mohammadhosseini/Desktop/Azmoon_BE/bin/Debug/net6.0/publish/Swashbuckle.AspNetCore.SwaggerGen.dll
 /Users/mohammadhosseini/Desktop/Azmoon_BE/bin/Debug/net6.0/publish/Swashbuckle.AspNetCore.SwaggerUI.dll
