@@ -34,4 +34,11 @@ public static class RegistrationBL
         var result = await DbRepository.SetStudentAnswer(request, context,_logger);
         return result;
     }
+
+        public static async Task<IEnumerable<ReposrtAnswers_res>> ReportAnswers(ReposrtAnswers_req request, DbContext context,ILogger _logger)
+    {
+        _logger.LogInformation("BL:SetStudentAnswer:");
+        var result = await DbRepository.ReportAnswers(request, context,_logger);
+        return result;
+    }
 }
