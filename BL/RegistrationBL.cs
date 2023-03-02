@@ -16,9 +16,9 @@ public static class RegistrationBL
         return result;
     }
 
-    public static async Task<IEnumerable<QuestionBank_Res?>> getQuestions(int GroupId, DbContext context,ILogger _logger)
+    public static async Task<IEnumerable<QuestionBank_Res?>> getQuestions(int GroupId,int nextQuestoinNumber, DbContext context,ILogger _logger)
     {
-        var result = await DbRepository.getQuestions(GroupId, context,_logger);
+        var result = await DbRepository.getQuestions(GroupId,nextQuestoinNumber, context,_logger);
         return result;
     }
 

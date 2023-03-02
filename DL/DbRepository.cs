@@ -31,10 +31,10 @@ public static class DbRepository
         }
     }
 
-    public static async Task<IEnumerable<QuestionBank_Res?>> getQuestions(int GroupId, DbContext context,ILogger _logger)
+    public static async Task<IEnumerable<QuestionBank_Res?>> getQuestions(int GroupId,int nextQuestoinNumber, DbContext context,ILogger _logger)
     {
         string query2 = $@"select * from [exibition_db].[hoseini].[Azmoon_QuestionBank]
-        where QuestionGroupId = {GroupId}";
+        where QuestionGroupId = {GroupId} and QuestionNumber={nextQuestoinNumber} ";
         try
         {
             var con = context.CreateConnection();

@@ -3,8 +3,9 @@ public class QuestionBank_Req
 {
     public int GroupId { get; set; }
     public string HubGroupName { get; set; }= String.Empty;
-    public int CurrentQustionNumber { get; set; }
+    public int CurrentQuestionNumber { get; set; }
     public int AddQuestionNumber { get; set; }
+    public string MobileNumber { get; set; }=String.Empty;
 }
 
 public class QuestionBank_Res

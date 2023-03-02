@@ -32,8 +32,9 @@ public class AzmoonController : ControllerBase
         _logger.LogInformation("controller: "+JsonConvert.SerializeObject(request));
         try
         {
-            IEnumerable<QuestionBank_Res?> result = await RegistrationBL.getQuestions(request.GroupId, _context,_logger);
-            var data = result?.First(p => p?.QuestionNumber == request.CurrentQustionNumber + request.AddQuestionNumber);
+            var nextQuestoinNumber = request.CurrentQuestionNumber + request.AddQuestionNumber;
+            IEnumerable<QuestionBank_Res?> result = await RegistrationBL.getQuestions(request.GroupId, nextQuestoinNumber , _context,_logger);
+            var data = result?.First(p => p?.QuestionNumber == request.CurrentQuestionNumber + request.AddQuestionNumber);
             _logger.LogInformation("controller: "+JsonConvert.SerializeObject(data));
             await _hub.Clients.All.SendAsync("showNextQuestion", data);
             // await _hub.Clients.Group(request.HubGroupName).SendAsync("showNextQuestion",data);
