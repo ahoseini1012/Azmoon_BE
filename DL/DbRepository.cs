@@ -141,7 +141,8 @@ public static class DbRepository
         string query = $@"  select studentId , count(*) studentAnswer
                             FROM [exibition_db].[hoseini].[Azmoon_Answers]
                             where examId={request.examId} and studentAnswer=correctAnswer
-                            group by studentId";
+                            group by studentId 
+                            order by studentAnswer desc";
         try
         {
             var con = context.CreateConnection();
