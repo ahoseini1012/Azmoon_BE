@@ -31,10 +31,10 @@ public static class DbRepository
         }
     }
 
-    public static async Task<IEnumerable<QuestionBank_Res?>> getQuestions(int GroupId,int nextQuestoinNumber, DbContext context,ILogger _logger)
+    public static async Task<IEnumerable<QuestionBank_Res?>> getQuestions(int nextQuestoinNumber, DbContext context,ILogger _logger)
     {
-        string query2 = $@"select * from [exibition_db].[hoseini].[Azmoon_QuestionBank]
-        where QuestionGroupId = {GroupId} and QuestionNumber={nextQuestoinNumber} ";
+        string query2 = $@"select * from [Azmoon_QuestionBank]
+        where isActive=1 and QuestionNumber={nextQuestoinNumber} ";
         try
         {
             var con = context.CreateConnection();
@@ -78,7 +78,7 @@ public static class DbRepository
 
         string query = $@"
         SELECT Top (1) *
-        FROM [exibition_db].[hoseini].[Azmoon_Exams]
+        FROM [Azmoon_Exams]
         where id= {examId} and expireAt>getdate()
         order by CreatedAt desc";
         try
@@ -139,7 +139,7 @@ public static class DbRepository
     {
         SetStudentAnswer_res Results = new SetStudentAnswer_res();
         string query = $@"  select studentId , count(*) studentAnswer
-                            FROM [exibition_db].[hoseini].[Azmoon_Answers]
+                            FROM [Azmoon_Answers]
                             where examId={request.examId} and studentAnswer=correctAnswer
                             group by studentId 
                             order by studentAnswer desc";

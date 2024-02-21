@@ -1,7 +1,7 @@
 
 public class QuestionBank_Req
 {
-    public int GroupId { get; set; }
+    // public int GroupId { get; set; }
     public string HubGroupName { get; set; }= String.Empty;
     public int CurrentQuestionNumber { get; set; }
     public int AddQuestionNumber { get; set; }
@@ -16,5 +16,6 @@ public class QuestionBank_Res
     public string Answer1 { get; set; } = String.Empty;
     public string Answer2 { get; set; } = String.Empty;
     public string Answer3 { get; set; } = String.Empty;
+    public string Answer4 { get; set; } = String.Empty;
     public int CorrectAnswer { get; set; }
 }
