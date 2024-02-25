@@ -24,6 +24,15 @@ public class AzmoonController : ControllerBase
         _context = context;
         _hub = hub;
     }
+   [EnableCors("Policy1")]
+    [HttpPost("test")]
+    public ApiResult<bool> Test()
+    {
+        return new ApiResult<bool>(){
+            data=true,
+            status=200
+        };
+    }
 
     [EnableCors("Policy1")]
     [HttpPost("showNextQuestion")]
